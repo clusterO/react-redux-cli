@@ -1,0 +1,26 @@
+{
+  "name": "react-redux-cli",
+  "version": "1.0.0",
+  "description": "react/redux cli generator",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/clusterO/react-redux-cli.git"
+  },
+  "keywords": [
+    "react",
+    "redux",
+    "cli",
+    "components",
+    "generator"
+  ],
+  "author": "cluster0",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/clusterO/react-redux-cli/issues"
+  },
+  "homepage": "https://github.com/clusterO/react-redux-cli#readme"
+}
