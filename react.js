@@ -1,4 +1,4 @@
-function CF(name) {
+function FC(name) {
   return `
     import React from 'react'
 
@@ -12,7 +12,7 @@ function CF(name) {
   `;
 }
 
-function CFR(name) {
+function FCR(name) {
   return `
     import React, { Component } from 'react'
     import { connect } from 'react-redux'
@@ -83,8 +83,8 @@ function CCR(name) {
 }
 
 module.exports = {
-  CF,
-  CFR,
+  FC,
+  FCR,
   CC,
   CCR,
 };
