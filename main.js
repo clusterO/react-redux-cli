@@ -67,7 +67,7 @@ rl.question("rr ", userInput => {
     fs.appendFile(path.join(__dirname, "types.js"), REDUX.RT(type));
   }
 
-  if (commands.indexOf("rr") !== -1) {
+  if (commands.indexOf("rd") !== -1) {
     REDUX.RR(path.join(__dirname, "types.js"))
       .then(data => {
         fs.writeFile(path.join(__dirname, "reducers.js"), data);
