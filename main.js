@@ -1,38 +1,19 @@
 const path = require("path");
-const readline = require("readline");
 const fs = require("fs").promises;
 const REACT = require("./react");
 const REDUX = require("./redux");
 
 const reactCommands = ["fc", "fcr", "cc", "ccr"];
 const reduxCommands = ["rs", "rt", "rd"];
-
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-});
+let userInput = [];
 
 process.argv.forEach((val, index) => {
-  if (index >= 2) console.log(`${index} : ${val}`);
+  if (index >= 2) userInput.push(val);
 });
 
-rl.question("", userInput => {
-  reactCommands.forEach(cmd => {
-    excuteReactCommand(cmd, userInput);
-  });
-
-  reduxCommands.forEach(cmd => {
-    excuteReduxCommand(cmd, userInput);
-  });
-
-  rl.close();
-});
-
-let excuteReactCommand = (cmd, userInput) => {
-  let commands = userInput.split(" ");
-
-  if (commands.indexOf(cmd) !== -1) {
-    let componentName = commands[commands.indexOf(cmd) + 1];
+let excuteReactCommand = cmd => {
+  if (userInput.indexOf(cmd) !== -1) {
+    let componentName = userInput[userInput.indexOf(cmd) + 1];
     let execute;
 
     switch (cmd) {
@@ -50,29 +31,27 @@ let excuteReactCommand = (cmd, userInput) => {
         break;
     }
 
-    if (commands.indexOf("+") === -1)
+    if (userInput.indexOf("+") === -1)
       fs.writeFile(
         path.join(__dirname, `${componentName}.js`),
         execute(componentName)
       );
     else {
-      let filename = `${commands[commands.indexOf("+") + 1]}.js`;
+      let filename = `${userInput[userInput.indexOf("+") + 1]}.js`;
       fs.appendFile(path.join(filename), execute(componentName));
     }
   }
 };
 
-let excuteReduxCommand = (cmd, userInput) => {
-  let commands = userInput.split(" ");
-
-  if (commands.indexOf(cmd) !== -1) {
+let excuteReduxCommand = cmd => {
+  if (userInput.indexOf(cmd) !== -1) {
     switch (cmd) {
       case "rs":
         fs.writeFile(path.join(__dirname, "store.js"), REDUX.RS());
         fs.writeFile(path.join(__dirname, "types.js"), "");
         break;
       case "rt":
-        let type = commands[commands.indexOf("rt") + 1];
+        let type = userInput[userInput.indexOf("rt") + 1];
         fs.appendFile(path.join(__dirname, "types.js"), REDUX.RT(type));
         break;
       case "rd":
@@ -85,3 +64,11 @@ let excuteReduxCommand = (cmd, userInput) => {
     }
   }
 };
+
+reactCommands.forEach(cmd => {
+  excuteReactCommand(cmd);
+});
+
+reduxCommands.forEach(cmd => {
+  excuteReduxCommand(cmd);
+});
