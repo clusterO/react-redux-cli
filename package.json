@@ -1,5 +1,5 @@
 {
-  "name": "rr",
+  "name": "rgn",
   "bin": "./bin.bat",
   "version": "1.0.0",
   "description": "react/redux cli generator",
