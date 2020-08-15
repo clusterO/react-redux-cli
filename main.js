@@ -12,7 +12,11 @@ const rl = readline.createInterface({
   output: process.stdout,
 });
 
-rl.question("rr ", userInput => {
+process.argv.forEach((val, index) => {
+  if (index >= 2) console.log(`${index} : ${val}`);
+});
+
+rl.question("", userInput => {
   reactCommands.forEach(cmd => {
     excuteReactCommand(cmd, userInput);
   });
@@ -51,7 +55,10 @@ let excuteReactCommand = (cmd, userInput) => {
         path.join(__dirname, `${componentName}.js`),
         execute(componentName)
       );
-    else fs.appendFile(path.join(__filename), execute(componentName));
+    else {
+      let filename = `${commands[commands.indexOf("+") + 1]}.js`;
+      fs.appendFile(path.join(filename), execute(componentName));
+    }
   }
 };
 
@@ -59,8 +66,6 @@ let excuteReduxCommand = (cmd, userInput) => {
   let commands = userInput.split(" ");
 
   if (commands.indexOf(cmd) !== -1) {
-    let execute;
-
     switch (cmd) {
       case "rs":
         fs.writeFile(path.join(__dirname, "store.js"), REDUX.RS());
