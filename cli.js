@@ -1,7 +1,7 @@
-const { exec } = require("child_process");
+const exec = require("child_process").exec;
 
 if (process.platform === "linux")
-  exec("script.sh", (error, _, __) => {
+  exec("script sh", (error, _, __) => {
     if (error !== null) {
       console.log(`exec error: ${error}`);
     }
