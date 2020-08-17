@@ -1,6 +1,6 @@
 # react-redux-cli
 
-<h4>React Redux generator</h4>
+#### React Redux generator
 
 ## Installation
 
@@ -8,20 +8,20 @@ npm i -g gnr
 
 ## Usage
 
-gnr [Options] component_name (optional: + file_name)
+rgn [Options] component_name (optional: + file_name)
 
 ## Options
 
--fc  | --functional-component: Create functional component
--cc  | --class-component: Create class component
--fcr | --functional-redux-component: Create functional component and connect to redux store
--ccr | --class-redux-component: Create class component and connect to redux store
--s   | style : Create component withStyles
--rs  | --redux-store: Create a redux store
--rt  | --redux-type: Add a type
--rr  | --redux-reducer: Create reducers for all types
+- -fc | --functional-component: Create functional component
+- -cc | --class-component: Create class component
+- -fcr | --functional-redux-component: Create functional component and connect to redux store
+- -ccr | --class-redux-component: Create class component and connect to redux store
+- -s | style : Create component withStyles
+- -rs | --redux-store: Create a redux store
+- -rt | --redux-type: Add a type
+- -rr | --redux-reducer: Create reducers for all types
 
-To append the component to an existing file use + 
+To append the component to an existing file use +
 
 ## e.g
 
