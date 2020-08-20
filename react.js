@@ -1,123 +1,137 @@
 function FC(name, style, append) {
-  return `${append ? "empty" : "import React from 'react'"}
-${
-  style && !append
-    ? "import { withStyles } from '@material-ui/core/styles'"
-    : "empty"
-}
+  let importStatements = "";
+  let withStylesStatement = "";
+  let stylesDeclaration = "";
+  let exportStatement = "";
 
-${style ? "const styles = {};" : "empty"}
+  if (!append) {
+    importStatements = "import React from 'react';\n";
+    withStylesStatement = style
+      ? "import { withStyles } from '@material-ui/core/styles';\n"
+      : "";
+    stylesDeclaration = style ? "const styles = {};\n" : "";
+  }
 
+  exportStatement = style
+    ? `export default withStyles(styles)(${name});\n`
+    : `export default ${name};\n`;
+
+  return `${importStatements}${withStylesStatement}${stylesDeclaration}
 function ${name}() {
   return (
     <div>
       
     </div>
-  )
+  );
 }
 
-${
-  style
-    ? `export default withStyles(styles)(${name});`
-    : `export default ${name};`
-}
-`.replace(/^\s*empty+$(?:\r\n?|\n)/gm, "");
+${exportStatement}`;
 }
 
 function FCR(name, style, append) {
-  return `${append ? "empty" : "import React, { Component } from 'react'"}
-${append ? "empty" : "import { connect } from 'react-redux'"}
-${
-  style && !append
-    ? "import { withStyles } from '@material-ui/core/styles'"
-    : "empty"
-}
+  let importStatements = "";
+  let connectStatement = "";
+  let withStylesStatement = "";
+  let stylesDeclaration = "";
+  let mapStateToProps = "";
+  let mapDispatchToProps = "";
+  let exportStatement = "";
 
-${style ? "const styles = {};" : "empty"}
-    
+  if (!append) {
+    importStatements = "import React, { Component } from 'react';\n";
+    connectStatement = append ? "" : "import { connect } from 'react-redux';\n";
+    withStylesStatement = style
+      ? "import { withStyles } from '@material-ui/core/styles';\n"
+      : "";
+    stylesDeclaration = style ? "const styles = {};\n" : "";
+    mapStateToProps = "const mapStateToProps = (state) => ({\n\n});\n";
+    mapDispatchToProps = "const mapDispatchToProps = {\n\n};\n";
+  }
+
+  exportStatement = style
+    ? `export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(${name}));\n`
+    : `export default connect(mapStateToProps, mapDispatchToProps)(${name});\n`;
+
+  return `${importStatements}${connectStatement}${withStylesStatement}${stylesDeclaration}
 const ${name} = () => {
   return (
     <div>
       
     </div>
-  )
+  );
 }
 
-const mapStateToProps = (state) => ({
-  
-})
-
-const mapDispatchToProps = {
-  
-}
-
-${
-  style
-    ? `export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(${name}))`
-    : `export default connect(mapStateToProps, mapDispatchToProps)(${name})`
-}
-`.replace(/^\s*empty+$(?:\r\n?|\n)/gm, "");
+${mapStateToProps}${mapDispatchToProps}${exportStatement}`;
 }
 
 function CC(name, style, append) {
-  return `${append ? "empty" : "import React, { Component } from 'react'"}
-${
-  style && !append
-    ? "import { withStyles } from '@material-ui/core/styles'"
-    : "empty"
-}
+  let importStatements = "";
+  let withStylesStatement = "";
+  let stylesDeclaration = "";
+  let exportStatement = "";
 
-${style ? "const styles = {};" : "empty"}
+  if (!append) {
+    importStatements = "import React, { Component } from 'react';\n";
+    withStylesStatement = style
+      ? "import { withStyles } from '@material-ui/core/styles';\n"
+      : "";
+    stylesDeclaration = style ? "const styles = {};\n" : "";
+  }
 
+  exportStatement = style
+    ? `export default withStyles(style)(${name});\n`
+    : `export default ${name};\n`;
+
+  return `${importStatements}${withStylesStatement}${stylesDeclaration}
 class ${name} extends Component {
   render() {
     return (
       <div>
         
       </div>
-    )
+    );
   }
 }
 
-${style ? `export default withStyles(style)${name}` : `export default ${name}`}
-`.replace(/^\s*empty+$(?:\r\n?|\n)/gm, "");
+${exportStatement}`;
 }
 
 function CCR(name, style, append) {
-  return `${append ? "empty" : "import React, { Component } from 'react'"}
-${append ? "empty" : "import { connect } from 'react-redux'"}
-${
-  style && !append
-    ? "import { withStyles } from '@material-ui/core/styles'"
-    : "empty"
-}
+  let importStatements = "";
+  let connectStatement = "";
+  let withStylesStatement = "";
+  let stylesDeclaration = "";
+  let mapStateToProps = "";
+  let mapDispatchToProps = "";
+  let exportStatement = "";
 
-${style ? "const styles = {};" : "empty"}
-    
+  if (!append) {
+    importStatements = "import React, { Component } from 'react';\n";
+    connectStatement = append ? "" : "import { connect } from 'react-redux';\n";
+    withStylesStatement = style
+      ? "import { withStyles } from '@material-ui/core/styles';\n"
+      : "";
+    stylesDeclaration = style ? "const styles = {};\n" : "";
+    mapStateToProps = "const mapStateToProps = (state) => ({\n\n});\n";
+    mapDispatchToProps = "const mapDispatchToProps = {\n\n};\n";
+  }
+
+  exportStatement = style
+    ? `export default connect(mapStateToProps, mapDispatchToProps)(withStyles(style)(${name}));\n`
+    : `export default connect(mapStateToProps, mapDispatchToProps)(${name});\n`;
+
+  return `${importStatements}${connectStatement}${withStylesStatement}${stylesDeclaration}
 class ${name} extends Component {
   render() {
     return (
       <div>
         
       </div>
-    )
+    );
   }
 }
 
-const mapStateToProps = (state) => ({
-  
-})
-
-const mapDispatchToProps = {
-  
-}
-
-${
-  style
-    ? `export default connect(mapStateToProps, mapDispatchToProps)(withStyles(style)(${name}))`
-    : `export default connect(mapStateToProps, mapDispatchToProps)(${name})`
-}
-`.replace(/^\s*empty+$(?:\r\n?|\n)/gm, "");
+${mapStateToProps}${mapDispatchToProps}${exportStatement}`;
 }
 
 module.exports = {

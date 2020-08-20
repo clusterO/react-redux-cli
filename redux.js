@@ -18,7 +18,7 @@ const store = createStore(
     applyMiddleware(...middleware),
     window.__REDUX_DEVTOOLS_EXTENSION__
       ? window.__REDUX_DEVTOOLS_EXTENSION__()
-      : nil => nil
+      : (nil) => nil
   )
 );
 
@@ -27,55 +27,50 @@ export default store;
 }
 
 function RT(type) {
-  return `export const ${type} = "${type}";\r\n`;
+  return `export const ${type} = "${type}";\n`;
 }
 
 function RR(file) {
   let imports = "";
   let cases = "";
-
-  const rl = readline.createInterface({
-    input: fs.createReadStream(file),
-    output: process.stdout,
-    terminal: false,
-  });
-
   let types = [];
 
   return new Promise((resolve) => {
+    const rl = readline.createInterface({
+      input: fs.createReadStream(file),
+      output: process.stdout,
+      terminal: false,
+    });
+
     rl.on("line", (line) => {
       types.push(line.split(" ")[2]);
     });
 
     rl.on("close", () => {
-      types.forEach((type) => {
-        imports += `${type},\r\n`;
-      });
-
-      types.forEach((type) => {
-        cases += `case ${type}:
-        return {
-          ...state,
-        };\r\n`;
-      });
+      imports = types.map((type) => `${type},`).join("\n");
+      cases = types
+        .map(
+          (type) =>
+            `    case ${type}:\n      return {\n        ...state,\n      };\n`
+        )
+        .join("\n");
 
       resolve(`
-      import {
-        ${imports}
-      } from "./types";
-  
-      const initialState = {
-        //Initialize State Here
-      };
-  
-      export default function (state = initialState, action) {
-        switch (action.type) {
-          ${cases}
-            default:
-              return state;
-          }
-        }
-    `);
+import {
+  ${imports}
+} from "./types";
+
+const initialState = {
+  //Initialize State Here
+};
+
+export default function(state = initialState, action) {
+  switch (action.type) {
+${cases}    default:
+      return state;
+  }
+}
+`);
     });
   });
 }
