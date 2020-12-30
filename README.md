@@ -27,7 +27,7 @@ To append the component to an existing file use + </br></br>
 
 - gnr -fc component_name</br>
   OR
-- gn --functional-component component_name</br>
+- gnr --functional-component component_name</br>
 
 ##### Generate functional component with style
 
