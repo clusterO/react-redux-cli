@@ -1,6 +1,6 @@
 {
   "name": "rgn",
-  "bin": "./bin.bat",
+  "bin": "./cli.js",
   "version": "1.0.0",
   "description": "react/redux cli generator",
   "main": "main.js",
@@ -24,5 +24,8 @@
   "bugs": {
     "url": "https://github.com/clusterO/react-redux-cli/issues"
   },
-  "homepage": "https://github.com/clusterO/react-redux-cli#readme"
+  "homepage": "https://github.com/clusterO/react-redux-cli#readme",
+  "dependencies": {
+    "fs-extra": "^9.0.1"
+  }
 }
