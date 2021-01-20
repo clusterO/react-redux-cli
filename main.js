@@ -1,3 +1,7 @@
+#!/usr/bin/env node
+
+const [, , ...args] = process.argv;
+
 const path = require("path");
 const REACT = require("./react");
 const REDUX = require("./redux");
@@ -22,15 +26,10 @@ const reduxCommands = [
   "--redux-reducer",
 ];
 const mongooseCommands = ["-m", "--model", "-sc", "--schema"];
-let userInput = [];
-
-process.argv.forEach((val, index) => {
-  if (index >= 2) userInput.push(val);
-});
 
 let excuteReactCommand = (cmd, style) => {
-  if (userInput.indexOf(cmd) !== -1) {
-    let componentName = userInput[userInput.indexOf(cmd) + 1];
+  if (args.indexOf(cmd) !== -1) {
+    let componentName = args[args.indexOf(cmd) + 1];
     let execute;
 
     switch (cmd) {
@@ -52,7 +51,7 @@ let excuteReactCommand = (cmd, style) => {
         break;
     }
 
-    if (userInput.indexOf("+") === -1)
+    if (args.indexOf("+") === -1)
       fse
         .outputFile(
           path.join(__dirname, `${componentName}.js`),
@@ -62,7 +61,7 @@ let excuteReactCommand = (cmd, style) => {
           console.error(err);
         });
     else {
-      let filename = `${userInput[userInput.indexOf("+") + 1]}.js`;
+      let filename = `${args[args.indexOf("+") + 1]}.js`;
       fse
         .appendFile(
           path.join(__dirname, filename),
@@ -74,7 +73,7 @@ let excuteReactCommand = (cmd, style) => {
 };
 
 let excuteReduxCommand = (cmd) => {
-  if (userInput.indexOf(cmd) !== -1) {
+  if (args.indexOf(cmd) !== -1) {
     switch (cmd) {
       case "-rs":
       case "--redux-store":
@@ -90,7 +89,7 @@ let excuteReduxCommand = (cmd) => {
         break;
       case "-rt":
       case "--redux-type":
-        let type = userInput[userInput.indexOf("rt") + 1];
+        let type = args[args.indexOf("rt") + 1];
         fse
           .appendFile(path.join(__dirname, "types.js"), REDUX.RT(type))
           .catch((err) => {
@@ -114,7 +113,7 @@ let excuteReduxCommand = (cmd) => {
 };
 
 let excuteMongooseCommand = (cmd) => {
-  if (userInput.indexOf(cmd) !== -1) {
+  if (args.indexOf(cmd) !== -1) {
     switch (cmd) {
       case "-m":
       case "--model":
@@ -127,10 +126,9 @@ let excuteMongooseCommand = (cmd) => {
 };
 
 reactCommands.forEach((cmd) => {
-  if (userInput.indexOf("-s") !== -1 || userInput.indexOf("--style") !== -1) {
-    if (userInput.indexOf("-s") !== -1)
-      userInput.splice(userInput.indexOf("-s"), 1);
-    else userInput.splice(userInput.indexOf("--style"), 1);
+  if (args.indexOf("-s") !== -1 || args.indexOf("--style") !== -1) {
+    if (args.indexOf("-s") !== -1) args.splice(args.indexOf("-s"), 1);
+    else args.splice(args.indexOf("--style"), 1);
     excuteReactCommand(cmd, true);
   } else excuteReactCommand(cmd, false);
 });
