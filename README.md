@@ -4,7 +4,7 @@
 
 ## Installation
 
-npm i -g gnr
+npm i -g rgn
 
 ## Usage
 
@@ -25,36 +25,36 @@ To append the component to an existing file use +
 
 ## e.g
 
-- gnr -fc component_name</br>
+- rgn -fc component_name</br>
   OR
-- gnr --functional-component component_name</br>
+- rgn --functional-component component_name</br>
 
 ##### Generate functional component with style
 
-- gnr -fc -s component_name</br>
+- rgn -fc -s component_name</br>
 
 ##### Generate class component with style connected to redux
 
-- gnr -ccr -s component_name</br>
+- rgn -ccr -s component_name</br>
 
 ##### Append to an existing file
 
-- gnr -fc -s component_name + file_name</br>
+- rgn -fc -s component_name + file_name</br>
 
 ##### Generate component to a specific directory
 
-- gnr -fc -s /directory_name/../component_name</br>
+- rgn -fc -s /directory_name/../component_name</br>
 
 ## Commands list
 
-- gnr -fc component_name
-- gnr -fc component_name + file_name
-- gnr -fcr component_name
-- gnr -fcr -s component_name
-- gnr -cc component_name
-- gnr -cc -s component_name
-- gnr -cc component_name + file_name
-- gnr -cc -s component_name + file_name
-- gnr -rs
-- gnr -rt type_name
-- gnr -rr
+- rgn -fc component_name
+- rgn -fc component_name + file_name
+- rgn -fcr component_name
+- rgn -fcr -s component_name
+- rgn -cc component_name
+- rgn -cc -s component_name
+- rgn -cc component_name + file_name
+- rgn -cc -s component_name + file_name
+- rgn -rs
+- rgn -rt type_name
+- rgn -rr
